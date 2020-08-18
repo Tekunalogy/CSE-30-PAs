@@ -13,6 +13,14 @@
 #include "test.h" /* For TEST() macro and stdio.h */
 #include "pa1.h"
 
+/* 
+ * Function Name: testhash
+ * Function prototype: void testhash();
+ * Description: The test method. Tests designed here.
+ * Side Effects: None
+ * Error Conditions: None
+ * Return Value: None
+ */
 void testhash()
 {
 	TEST(hash("abc") == 693737);

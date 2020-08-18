@@ -13,7 +13,15 @@
 #include "test.h" /* For TEST() macro and stdio.h */
 #include "pa1.h"
 
-void testprependNode()
+/* 
+ * Function Name: testpopulateTable
+ * Function prototype: void testpopulateTable();
+ * Description: The test method. Tests designed here.
+ * Side Effects: None
+ * Error Conditions: None
+ * Return Value: None
+ */
+void testpopulateTable()
 {
 }
 
