@@ -59,9 +59,13 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
+    //read from file and then close file.
     populateTable(hashtable, fptr);
+    fclose(fptr);
+
     launchUserQuery(hashtable);
 
+    //cleanup function for program
     cleanup(hashtable);
     return EXIT_SUCCESS;
 }

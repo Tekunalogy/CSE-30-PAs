@@ -21,13 +21,15 @@
  */
 void populateTable( linkedListNode_t ** hashtbl, FILE * dataFile )
 {
-    char string[256];
-    while(!feof(dataFile))
+    char string[256]; //magic num
+    while(fgets(string, sizeof(string), dataFile))
     {
-        fgets(string, sizeof(string), dataFile);
-        for(int i = 0; string[i]; i++){
-			if(string[i] == '\n')
-				string[i] = '\0';
+        char * newLineChar = strchr(string, '\n'); //magic num
+        if(newLineChar)
+            *newLineChar = '\0';
+        
+        for(int i = 0; i < strlen(string); i++)
+        {
 			string[i] = tolower(string[i]);
 		}
         llTableAddString(hashtbl, string);
