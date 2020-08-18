@@ -29,6 +29,7 @@ int main(int argc, char *argv[])
     //initialize empty hashtable
     linkedListNode_t **hashtable = newLinkedListArray(DEFAULT_SIZE);
     opterr = 0;
+    optind = 0;
     while ((option = getopt(argc, argv, FLAGS)) != -1)
     {
         switch (option)
@@ -48,11 +49,14 @@ int main(int argc, char *argv[])
                 break;
 
             default:
+                fprintf(stderr, "%s", LONG_USAGE);
+                return EXIT_FAILURE;
                 break;
         }
         
     }
-    if (optind > argc || optind <= 0)
+
+    if (optind > argc)
     {
         fprintf(stderr, "%s", INVALID_ARGS);
         fprintf(stderr, "%s", SHORT_USAGE);
@@ -65,7 +69,7 @@ int main(int argc, char *argv[])
 
     launchUserQuery(hashtable);
 
-    //cleanup function for program
+    //cleanup function for hashtable
     cleanup(hashtable);
     return EXIT_SUCCESS;
 }

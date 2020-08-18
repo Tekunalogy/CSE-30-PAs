@@ -27,8 +27,8 @@ void populateTable( linkedListNode_t ** hashtbl, FILE * dataFile )
         char * newLineChar = strchr(string, '\n'); //magic num
         if(newLineChar)
             *newLineChar = '\0';
-        
-        for(int i = 0; i < strlen(string); i++)
+            
+        for(int i = 0; string[i]; i++)
         {
 			string[i] = tolower(string[i]);
 		}
