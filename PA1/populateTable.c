@@ -8,7 +8,6 @@
 
 #include "pa1.h"
 
-
 /*
  * Name: populateTable
  * Function Prototype: void populateTable( linkedListNode_t ** hashtbl, 

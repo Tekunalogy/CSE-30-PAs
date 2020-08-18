@@ -8,8 +8,6 @@
 
 #include "pa1.h"
 
-/**** INCOMPLETE ****/
-
 /*
  * Name: retrieveLinkedList
  * Function Prototype: int checkTable(char * str, linkedListNode_t ** hashtbl);
@@ -24,11 +22,28 @@
  */
 int checkTable( char * str, linkedListNode_t ** hashtbl )
 {
-    // check if null
-    // linkedListNode_t * linkedList = retrieveLinkedList(hashtbl, str);
-    // while(linkedList->next != NULL)
-    // {
-    //     strcmp(linkedList.value, strcopy);
-    // }
+    //hashtable does not exist, therefore not spam. Return 0
+    if(hashtbl == NULL)
+        return 0;
+
+    //retrieve linkedList in hashtable
+    linkedListNode_t * linkedList = retrieveLinkedList(hashtbl, str);
+
+    //means string does not exist in hashtable, therefore not spam. Return 0
+    if(linkedList == NULL)
+        return 0;
+
+    //searches linkedList for string.
+    while(linkedList != NULL)
+    {
+        //if found return 1
+        if(strcmp(linkedList->value, str) == 0)
+        {
+            return 1;
+        }
+        linkedList = linkedList->next;
+        
+    }
+    //if not found return 0
     return 0;
 }

@@ -9,6 +9,7 @@
 #include "pa1.h"
 #include "pa1Strings.h"
 #include <getopt.h>
+#include <stdlib.h>
 
 /*
  * Name: main
@@ -19,42 +20,48 @@
  *              array of string arguments
  * Return Value: 0 if program exits successfully. 1 if there is an error.
  */
-int main(int argc, char * argv[])
+int main(int argc, char *argv[])
 {
+    //initialize option variable for getopt
     int option;
+    //initialize FILE pointer
     FILE *fptr;
-    linkedListNode_t ** hashtable;
-    while((option = getopt(argc, argv, FLAGS)) != -1)
+    //initialize empty hashtable
+    linkedListNode_t **hashtable = newLinkedListArray(DEFAULT_SIZE);
+    opterr = 0;
+    while ((option = getopt(argc, argv, FLAGS)) != -1)
     {
-        switch(option)
+        switch (option)
         {
             case 'h':
                 printf("%s", LONG_USAGE);
-                return 0;
+                return EXIT_SUCCESS;
                 break;
 
             case 'i':
-                printf("%s\n", optarg);
-                if((fptr = fopen(optarg, "r")) == NULL)
+                if ((fptr = fopen(optarg, "r")) == NULL)
                 {
-                    printf("%s", FILTER_ERR);
-                    return 1;
+                    perror(FILTER_ERR);
+                    fprintf(stderr, "%s", SHORT_USAGE);
+                    return EXIT_FAILURE;
                 }
-                
-                break;
-            case ':':
-                printf("JELLO\n");
                 break;
 
             default:
-                if(optind >= argc)
-                {
-                    fprintf(stderr, "%s", INVALID_ARGS);
-                }
                 break;
         }
-   }
+        
+    }
+    if (optind > argc || optind <= 0)
+    {
+        fprintf(stderr, "%s", INVALID_ARGS);
+        fprintf(stderr, "%s", SHORT_USAGE);
+        return EXIT_FAILURE;
+    }
 
-//    cleanup(hashtable);
-   return 0;
+    populateTable(hashtable, fptr);
+    launchUserQuery(hashtable);
+
+    cleanup(hashtable);
+    return EXIT_SUCCESS;
 }
