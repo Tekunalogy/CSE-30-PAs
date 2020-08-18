@@ -1,5 +1,5 @@
 /*
- * Filename: testprependNode.c
+ * Filename: testpopulateTable.c
  * uthor: Kunal Singla
  * UserId: cs30s220eq
  * Description: Unit test program to test the function hash().

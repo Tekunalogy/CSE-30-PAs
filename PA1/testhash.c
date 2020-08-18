@@ -1,23 +1,22 @@
 /*
- * Filename: testhash
- * Author: TODO
- * Userid: TODO
+ * Filename: testhash.c
+ * uthor: Kunal Singla
+ * UserId: cs30s220eq
  * Description: Unit test program to test the function hash().
- * Date: TODO
- * Sources of Help: TODO
+ * Date: 8/17/2020
+ * Sources of help: C documentation, Piazza
  */
 
 #include <string.h>
 #include <stdlib.h>
 
-#include "test.h"    /* For TEST() macro and stdio.h */
+#include "test.h" /* For TEST() macro and stdio.h */
 #include "pa1.h"
 
-void testhash() {
-
-  TEST( hash( "abc" ) == 693737 );
-  TEST( hash( "paul" ) == 26452777 );
-
+void testhash()
+{
+	TEST(hash("abc") == 693737);
+	TEST(hash("paul") == 26452777);
 }
 
 /* 
@@ -28,9 +27,10 @@ void testhash() {
  * Error Conditions: None
  * Return Value: 0 on exit success.
  */
-int main() {
-  fprintf( stderr, "Testing hash...\n\n" );
-  testhash();
-  fprintf( stderr, "\nDone running tests.\n" );
-  return 0;
+int main()
+{
+	fprintf(stderr, "Testing hash...\n\n");
+	testhash();
+	fprintf(stderr, "\nDone running tests.\n");
+	return 0;
 }
