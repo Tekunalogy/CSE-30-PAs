@@ -55,8 +55,7 @@ int main(int argc, char *argv[])
         }
         
     }
-
-    if (optind > argc)
+    if(optind <= 1 || optind > argc)
     {
         fprintf(stderr, "%s", INVALID_ARGS);
         fprintf(stderr, "%s", SHORT_USAGE);

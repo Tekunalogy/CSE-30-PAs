@@ -7,6 +7,7 @@
  */
 
 #include "pa1.h"
+#include <string.h>
 
 /*
  * Name: populateTable
@@ -21,12 +22,12 @@
  */
 void populateTable( linkedListNode_t ** hashtbl, FILE * dataFile )
 {
-    char string[256]; //magic num
+    char string[STRING_BUFFER]; //magic num
     while(fgets(string, sizeof(string), dataFile))
     {
-        char * newLineChar = strchr(string, '\n'); //magic num
+        char * newLineChar = strchr(string, NEWLINE_CHAR); //magic num
         if(newLineChar)
-            *newLineChar = '\0';
+            *newLineChar = NULL_TERMINATOR;
             
         for(int i = 0; string[i]; i++)
         {

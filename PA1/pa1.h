@@ -28,6 +28,11 @@ typedef struct llist {
 #define DEFAULT_SIZE 2003
 #endif
 
+/* PopulateTable */
+#define NEWLINE_CHAR        '\n'
+#define NULL_TERMINATOR     '\0'
+#define STRING_BUFFER       256
+
 /* Extra credit command line parsing */
 #define FLAGS "si:h"
 #define INFILE_FLAG 'i'
