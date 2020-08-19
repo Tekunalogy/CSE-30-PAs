@@ -23,8 +23,13 @@
  */
 void testhash()
 {
-	TEST(hash("abc") == 693737);
-	TEST(hash("paul") == 26452777);
+	TEST(hash("abc") 	== 693737);
+	TEST(hash("paul") 	== 26452777);
+	TEST(hash("") 		== 11);
+	TEST(hash(" ") 		== 439);
+	TEST(hash("\n") 	== 417);
+	TEST(hash("%s") 	== 16543);
+	TEST(hash("brown") 	== 952228715);
 }
 
 /* 
