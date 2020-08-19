@@ -29,7 +29,12 @@ int main(int argc, char *argv[])
     //initialize empty hashtable
     linkedListNode_t **hashtable = newLinkedListArray(DEFAULT_SIZE);
     opterr = 0;
-    optind = 0;
+    if(argc < 2 || argc > 3)
+    {
+        fprintf(stderr, "%s", INVALID_ARGS);
+        fprintf(stderr, "%s", SHORT_USAGE);
+        return EXIT_FAILURE;
+    }
     while ((option = getopt(argc, argv, FLAGS)) != -1)
     {
         switch (option)
@@ -53,15 +58,10 @@ int main(int argc, char *argv[])
                 return EXIT_FAILURE;
                 break;
         }
-        
+   
     }
     
-    if(optind <= 1 || argc > 3)
-    {
-        fprintf(stderr, "%s", INVALID_ARGS);
-        fprintf(stderr, "%s", SHORT_USAGE);
-        return EXIT_FAILURE;
-    }
+    
 
     //read from file and then close file.
     populateTable(hashtable, fptr);

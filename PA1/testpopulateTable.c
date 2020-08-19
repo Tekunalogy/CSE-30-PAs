@@ -12,6 +12,12 @@
 
 #include "test.h" /* For TEST() macro and stdio.h */
 #include "pa1.h"
+#define EMAILS_0 "emails/no_emails"
+#define EMAILS_10 "emails/email_10"
+#define EMAILS_100 "emails/email_100"
+#define EMAILS_1000 "emails/email_1000"
+#define EMAILS_10000 "emails/email_10000"
+#define EMAILS_ALL "emails/email_all"
 
 /* 
  * Function Name: testpopulateTable
@@ -23,6 +29,10 @@
  */
 void testpopulateTable()
 {
+	//TEST EMPTY FILE
+	linkedListNode_t ** table = newLinkedListArray(DEFAULT_SIZE);
+	FILE *fptr = fopen(EMAILS_0, "r");
+	populateTable(table, fptr);
 }
 
 /* 
@@ -35,5 +45,8 @@ void testpopulateTable()
  */
 int main()
 {
+	fprintf(stderr, "Testing hash...\n\n");
+	testpopulateTable();
+	fprintf(stderr, "\nDone running tests.\n");
 	return 0;
 }

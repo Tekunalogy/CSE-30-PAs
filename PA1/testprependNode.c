@@ -23,6 +23,16 @@
  */
 void testprependNode()
 {
+	//TEST REGULAR STRING
+	linkedListNode_t ** table = newLinkedListArray(DEFAULT_SIZE);
+	prependNode(&table[0], "STRING");
+	TEST(strcmp(table[0]->value, "STRING") == 0);
+	TEST(table[0]->next == NULL);
+
+	//TEST EMPTY STRING
+	prependNode(&table[1], "");
+	TEST(strcmp(table[1]->value, "") == 0);
+	TEST(table[1]->next == NULL);
 }
 
 /* 
@@ -35,5 +45,8 @@ void testprependNode()
  */
 int main()
 {
+	fprintf(stderr, "Testing hash...\n\n");
+	testprependNode();
+	fprintf(stderr, "\nDone running tests.\n");
 	return 0;
 }
