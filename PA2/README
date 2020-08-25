@@ -1,0 +1,79 @@
+/*
+ * Filename: README
+ * Author: Kunal Singla
+ * Userid: cs30S220eq
+ * Date: 08/24/2020
+ * Sources of help: Guidelines
+ */
+
+Description
+-----------
+    This simple program takes a string and writes the string in all upper case
+letters to stdout.
+
+How to compile
+--------------
+    To compile this program, simply navigate to the directory containing the
+source files for PA2 and run the following command:
+    gcc -g -o allcaps allcaps.s
+
+How to run
+----------
+    To run the program, type the executable name.  For example:
+        ./allcaps
+
+Normal output
+-------------
+    Normal output is printed to stdout.  An example of normal output would be
+the following:
+(given the string "hello world! 123 a z ` { A Z")
+cs30s220eq@pi-cluster-013:~/PAs/PA2$ ./allcaps
+HELLO WORLD! 123 A Z ` { A Z
+
+Abnormal output
+---------------
+    The only abnormal output is when a string contains '\0' with other 
+characters after it. Regardless of input, it always prints to stout.
+For example:
+(given the string: "123456\078)
+
+cs30s220eq@pi-cluster-013:~/PAs/PA2$ ./allcaps
+123456@
+
+Testing
+-------
+
+This program was tested manually by replacing the string stored under mesg.
+The program indicated no error when all lower case alphabet characters were
+transformed to upper case and all other characters were ignored and printed
+without modification.
+
+In particular, these inputs were tested on the executable:
+  - lower case alphabet
+  - upper case alphabet
+  - mix of lower case and upper case letters
+  - mix of numbers and letters
+  - mix of numbers, letters, and special characters
+  - null terminator '\0'
+  - strings longer than 32 characters
+  - '\078' and similar (already described as abnormal output)
+
+Questions
+---------
+
+C Question:
+5) long x = *(nums + 2);
+
+Terminal Question:
+6) ls | wc -l
+
+Academic Integrity Question:
+7) Assuming I an unable to debug just by looking at my code. I would comment
+every line of my code. That usually helps find some bugs. If I am still unable,
+to resolve my issue I would check piazza for any similar issues. If I am unable
+to find a post on piazza, I can create one (private if I am showing code). If
+not on piazza, I would check if there are tutors available on autograder. If not
+on autograder, then I would check if there are professor or tutor office hours.
+If none of those resources are available then I would try my best to complete
+the assignment myself without searching online or asking anyone inside or
+outside the class.
