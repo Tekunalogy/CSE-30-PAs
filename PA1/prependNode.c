@@ -22,7 +22,7 @@
  */
 void prependNode( linkedListNode_t ** head, char * str )
 {
-	linkedListNode_t * newNode = newLinkedListNode();
+    linkedListNode_t * newNode = newLinkedListNode();
     char * strCopy = strcp(str);
     newNode->value = strCopy;
 
