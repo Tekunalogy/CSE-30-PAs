@@ -37,7 +37,7 @@ int main(int argc, char * argv[])
         {
             case HEAP_FLAG:
                 printf("USED -h + arg is %s\n", optarg);
-                a = optarg;
+
                 break;
 
             case STACK_FLAG:
@@ -48,9 +48,10 @@ int main(int argc, char * argv[])
                 printf("USED none + arg is %s\n", optarg);
                 break;
         }
+        a = optarg;
     }
-
-    printf("%s\n", a);
+    unsigned long temp = parseNum(argv);
+    printf("%lu\n", temp);
 
     return EXIT_SUCCESS;
 }
