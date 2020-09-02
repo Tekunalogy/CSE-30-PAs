@@ -12,14 +12,23 @@
 	.syntax unified
 
 @ Functions
-	.extern putchar                 @ function to write a char to stdout
-	.global main                    @ defining global main function
+	.global extractParts            @ defining global main function
 
 @ Constants
 	.equ 	FP_OFFSET, 4            @ fp offset in simple frame
+        .equ 	ASCII_OFFSET, 48        @ ascii offset, numbers start at 48
+        .equ 	SIGN_SHIFT, 31          @ bitwise shift factor for sign
+        .equ 	MANT_SHIFT, 9           @ bitwise shift factor for sign
+        .equ 	EXP_OFFSET, 1           @ offset for exp struct member location
+        .equ 	MANT_OFFSET, 4          /* offset for mantissa struct member 
+                                        location */
+        .equ    MANTISSA_MASK, 0xFFFFFF @ Mask to extract mantissa
+        .equ    LEADING_BIT, 0x800000   @ Factor to set leading bit to 1
+        .equ    EXP_SHIFT, 23           @ Shift factor to remove mantissa
+        .equ    EXP_MASK, 0xFF          @ Mask to remove sign bit after shifting
+        .equ    EXP_SUB_FACTOR, 0x7F    @ subtract out IEEE bias factor (32-bit)
 	.equ 	EXIT_SUCCESS, 0         @ value for successful ending of program
-
-
+@ Text segment
 	.text
 	.type	extractParts, %function @ indication that main is a function
 
@@ -45,7 +54,26 @@ extractParts:
 	add	fp, sp, FP_OFFSET       @ locate our frame pointer
 
 	/* START OF MAIN PROGRAM */
+        mov     r4, r0                  @ copy argument to preserved register
+        mov     r5, r1                  @ copy argument to preserved register
+        
+        /* Finding the sign */
+        lsr     r0, r0, SIGN_SHIFT      @ logical shift of 31 bits to the right
+        add     r0, r0, ASCII_OFFSET    @ offset ascii value so it stores number
+        strb    r0, [r5]                @ store the sign bit in the struct
 
+        /* Finding the exponent */
+        mov     r0, r4                  @ copy number from preserved register
+        lsr     r0, r0, EXP_SHIFT       @ shift to remove mantissa
+        and     r0, r0, EXP_MASK        @ mask to remove sign bit
+        sub     r0, r0, EXP_SUB_FACTOR  @ subtract out IEEE 32-bit bias factor
+        str     r0, [r5, EXP_OFFSET]    @ store the exponent in the struct
+
+        /* Finding the mantissa */
+        mov     r0, r4                  @ copy number from preserved register
+        and     r0, r0, MANTISSA_MASK   @ remove everything but the mantissa
+        orr     r0, r0, LEADING_BIT     @ add the hidden leading bit 1
+        str     r0, [r5, MANT_OFFSET]   @ store the mantissa in the struct
 
 	/* END OF MAIN PROGRAM */
 

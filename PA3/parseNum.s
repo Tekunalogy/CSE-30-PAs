@@ -22,7 +22,6 @@
 	.equ 	HEXADECIMAL, 16     	@ Base-16 factor
 	.equ 	NULL_TERMINATOR, 0x0    /* Null terminator character '\0' for
                                            detecting end of string */
-
 @ Text segment
 	.text
 	.type	parseNum, %function	@ indication that main is a function

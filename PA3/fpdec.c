@@ -11,6 +11,7 @@
 #include <getopt.h>
 #include <string.h>
 #include "pa3.h"
+#include "pa3Strings.h"
 
 /*
  * Name: main
@@ -27,31 +28,40 @@ int main(int argc, char * argv[])
 {
     //initialize option variable for getopt
     int option;
-    char * a;
+    char onHeap = 0;
+    ieeeParts_t * IEEE_Parts;
 
     //initialize global var opterr to stop automatic getopt errors
     opterr = 0;
+    if(argc < 3 || argc > 3)
+        fprintf(stderr, "%s", INVALID_ARGS);
     while((option = getopt(argc, argv, FLAGS)) != -1)
     {
         switch (option)
         {
             case HEAP_FLAG:
-                printf("USED -h + arg is %s\n", optarg);
-
+                IEEE_Parts = malloc(sizeof(ieeeParts_t));
+                onHeap = 1;
                 break;
 
             case STACK_FLAG:
-                printf("USED -s + arg is %s\n", optarg);
+                IEEE_Parts = &(ieeeParts_t){ '0', '0', 0 };
                 break;
 
             default:
-                printf("USED none + arg is %s\n", optarg);
+                fprintf(stderr, "%s", SHORT_USAGE);
+                return EXIT_FAILURE;
                 break;
         }
-        a = optarg;
     }
-    unsigned long temp = parseNum(argv);
-    printf("%lu\n", temp);
+    
+    extractParts(parseNum(argv), IEEE_Parts);
 
+    printf(SIGN_STR, IEEE_Parts->sign);
+    printf(EXP_STR, IEEE_Parts->exp);
+    printf(MANTISSA_STR, IEEE_Parts->mantissa);
+
+    if(onHeap)
+        free(IEEE_Parts);
     return EXIT_SUCCESS;
 }
