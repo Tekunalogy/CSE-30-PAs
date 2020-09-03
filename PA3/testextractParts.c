@@ -46,7 +46,8 @@
  * Error Conditions: None
  * Return Value: None
  */
-void testExtractParts(unsigned long num, ieeeParts_t * correctStruct, ieeeParts_t * myFuncStruct)
+void testExtractParts(unsigned long num, ieeeParts_t * correctStruct, 
+                                         ieeeParts_t * myStruct)
 {
     fprintf(stderr, testingString, num);
     extractParts(num, myFuncStruct);
@@ -65,7 +66,7 @@ void testExtractParts(unsigned long num, ieeeParts_t * correctStruct, ieeeParts_
  */
 int main()
 {
-	fprintf(stderr, "Testing extractParts...\n");
+    fprintf(stderr, "Testing extractParts...\n");
     ieeeParts_t * correctStruct;
     ieeeParts_t * myFuncStruct;
 
@@ -106,7 +107,7 @@ int main()
     testExtractParts(hex_4, correctStruct, myFuncStruct);
 
 
-	fprintf(stderr, "\nDone running tests.\n");
+    fprintf(stderr, "\nDone running tests.\n");
 	
     return EXIT_SUCCESS;
 }
