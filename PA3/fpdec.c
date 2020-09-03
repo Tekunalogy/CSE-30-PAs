@@ -32,10 +32,14 @@ int main(int argc, char * argv[])
     ieeeParts_t * IEEE_Parts;
 
     //initialize global var opterr to stop automatic getopt errors
-    opterr = 0;
-    if(argc < 3 || argc > 3)
-        fprintf(stderr, "%s", INVALID_ARGS);
-    while((option = getopt(argc, argv, FLAGS)) != -1)
+    // opterr = 0;
+    if(argc < MIN_ARGS || argc > MIN_ARGS)
+    {
+        fprintf(stderr, print_String, INVALID_ARGS);
+        fprintf(stderr, print_String, SHORT_USAGE);
+        return EXIT_FAILURE;
+    }
+    while ((option = getopt(argc, argv, FLAGS)) != -1)
     {
         switch (option)
         {
@@ -45,11 +49,11 @@ int main(int argc, char * argv[])
                 break;
 
             case STACK_FLAG:
-                IEEE_Parts = &(ieeeParts_t){ '0', '0', 0 };
+                IEEE_Parts = &(ieeeParts_t){ init_ch, init_ch, init_long };
                 break;
 
             default:
-                fprintf(stderr, "%s", SHORT_USAGE);
+                fprintf(stderr, print_String, SHORT_USAGE);
                 return EXIT_FAILURE;
                 break;
         }

@@ -15,8 +15,7 @@
 	.global extractParts            @ defining global main function
 
 @ Constants
-	.equ 	FP_OFFSET, 4            @ fp offset in simple frame
-        .equ 	ASCII_OFFSET, 48        @ ascii offset, numbers start at 48
+	.equ 	FP_OFFSET, 12           @ fp offset in simple frame
         .equ 	SIGN_SHIFT, 31          @ bitwise shift factor for sign
         .equ 	MANT_SHIFT, 9           @ bitwise shift factor for sign
         .equ 	EXP_OFFSET, 1           @ offset for exp struct member location
@@ -50,7 +49,7 @@ point number and extract its various parts to fill the passed in struct.
 
 extractParts:
 	/* PROLOGUE */
-	push	{fp, lr}                @ stack frame register save
+	push	{r4, r5, fp, lr}        @ stack frame register save
 	add	fp, sp, FP_OFFSET       @ locate our frame pointer
 
 	/* START OF MAIN PROGRAM */
@@ -59,7 +58,6 @@ extractParts:
         
         /* Finding the sign */
         lsr     r0, r0, SIGN_SHIFT      @ logical shift of 31 bits to the right
-        add     r0, r0, ASCII_OFFSET    @ offset ascii value so it stores number
         strb    r0, [r5]                @ store the sign bit in the struct
 
         /* Finding the exponent */
@@ -67,7 +65,7 @@ extractParts:
         lsr     r0, r0, EXP_SHIFT       @ shift to remove mantissa
         and     r0, r0, EXP_MASK        @ mask to remove sign bit
         sub     r0, r0, EXP_SUB_FACTOR  @ subtract out IEEE 32-bit bias factor
-        str     r0, [r5, EXP_OFFSET]    @ store the exponent in the struct
+        strb    r0, [r5, EXP_OFFSET]    @ store the exponent in the struct
 
         /* Finding the mantissa */
         mov     r0, r4                  @ copy number from preserved register
@@ -81,6 +79,6 @@ epilogue:
 	/* EPILOGUE */
 	mov	r0, EXIT_SUCCESS        @ set return to EXIT_SUCCESS
 	sub	sp, fp, FP_OFFSET       @ restore stack frame top
-	pop	{fp, lr}                @ remove stack frame and restore
+	pop	{r4, r5, fp, lr}        @ remove stack frame and restore
 	bx	lr                      @ return to calling function
 .end

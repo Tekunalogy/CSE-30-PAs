@@ -18,6 +18,11 @@
 #define FLAGS "s:h:"
 #define HEAP_FLAG 'h'
 #define STACK_FLAG 's'
+#define print_String "%s"
+#define MIN_ARGS 3
+#define init_ch '0'
+#define init_long 0
+
 
 typedef struct fpbits{
 	unsigned char sign;
