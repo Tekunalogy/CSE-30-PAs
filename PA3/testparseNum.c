@@ -121,8 +121,8 @@ void testSpecificHexadecimalStrings(char * input)
  */
 int main()
 {
-	fprintf(stderr, "Testing parseNum...\n\n");
-	
+    fprintf(stderr, "Testing parseNum...\n\n");
+    
     //testing x length hex strings, n number of times
     testNHexadecimalStrings(num_tests, length_8_hex);
     testNHexadecimalStrings(num_tests, length_6_hex);
@@ -135,7 +135,7 @@ int main()
     testSpecificHexadecimalStrings(F_hex);
     testSpecificHexadecimalStrings(hex_1);
 
-	fprintf(stderr, "\nDone running tests.\n");
+    fprintf(stderr, "\nDone running tests.\n");
 
-	return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }
