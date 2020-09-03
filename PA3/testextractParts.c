@@ -50,10 +50,10 @@ void testExtractParts(unsigned long num, ieeeParts_t * correctStruct,
                                          ieeeParts_t * myStruct)
 {
     fprintf(stderr, testingString, num);
-    extractParts(num, myFuncStruct);
-    TEST(correctStruct->sign == myFuncStruct->sign);
-    TEST(correctStruct->exp == myFuncStruct->exp);
-    TEST(correctStruct->mantissa == myFuncStruct->mantissa);   
+    extractParts(num, myStruct);
+    TEST(correctStruct->sign == myStruct->sign);
+    TEST(correctStruct->exp == myStruct->exp);
+    TEST(correctStruct->mantissa == myStruct->mantissa);   
 }
 
 /* 
