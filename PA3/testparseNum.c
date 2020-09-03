@@ -12,9 +12,26 @@
 
 #include "test.h" /* For TEST() macro and stdio.h */
 #include "pa3.h"
+
+#define testingString_1 "\n\nTesting Length %d Hex Strings %d times:\n"
+#define testingString_2 "\n\nTesting Custom Hex String: %s\n"
+
 #define hexChs {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'}
 #define base_16 16
+#define index_2 2
 #define three_args 3
+#define num_tests 5
+
+#define length_8_hex 8
+#define length_6_hex 6
+#define length_4_hex 4
+#define length_1_hex 1
+
+#define zero_hex "0x0"
+#define one_hex "0x1"
+#define F_hex "0xFFFFFFFF"
+#define hex_1 "0x41260000"
+
 
 /* 
  * Function Name: generateRandomHexString
@@ -48,15 +65,16 @@ char * generateRandomHexString(unsigned int length)
  * Error Conditions: None
  * Return Value: None
  */
-void testNHexadecimalStrings(unsigned int n)
+void testNHexadecimalStrings(unsigned int n, int length)
 {
+    fprintf(stderr, testingString_1, length, n);
     char * testString;
     char * argv[three_args];
 
     for(int i = 0; i < n; ++i)
     {
-        testString = generateRandomHexString(8);
-        argv[2] = testString;
+        testString = generateRandomHexString(length);
+        argv[index_2] = testString;
         unsigned long myfuncOutput = parseNum(argv);
         unsigned long strtoulOutput = strtoul(testString, '\0', base_16);
         TEST(myfuncOutput == strtoulOutput);
@@ -74,8 +92,9 @@ void testNHexadecimalStrings(unsigned int n)
  */
 void testSpecificHexadecimalStrings(char * input)
 {
+    fprintf(stderr, testingString_2, input);
     char * argv[three_args];
-    argv[2] = input;
+    argv[index_2] = input;
     unsigned long myfuncOutput = parseNum(argv);
     unsigned long strtoulOutput = strtoul(input, '\0', base_16);
     TEST(myfuncOutput == strtoulOutput);
@@ -87,7 +106,7 @@ void testSpecificHexadecimalStrings(char * input)
  * Function Name: main()
  * Function prototype: int main();
  * Description: The test driver. Runs specified tests.
- * Side Effects: None
+ * Side Effects: Prints to stderr
  * Error Conditions: None
  * Return Value: 0 on exit success.
  */
@@ -95,10 +114,15 @@ int main()
 {
 	fprintf(stderr, "Testing parseNum...\n\n");
 	
-    testNHexadecimalStrings(5);
-    testSpecificHexadecimalStrings("0x0");
-    testSpecificHexadecimalStrings("0x1");
-    testSpecificHexadecimalStrings("0xFFFFFFFF");
+    testNHexadecimalStrings(num_tests, length_8_hex);
+    testNHexadecimalStrings(num_tests, length_6_hex);
+    testNHexadecimalStrings(num_tests, length_4_hex);
+    testNHexadecimalStrings(num_tests, length_1_hex);
+
+    testSpecificHexadecimalStrings(zero_hex);
+    testSpecificHexadecimalStrings(one_hex);
+    testSpecificHexadecimalStrings(F_hex);
+    testSpecificHexadecimalStrings(hex_1);
 
 	fprintf(stderr, "\nDone running tests.\n");
 
