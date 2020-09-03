@@ -53,7 +53,7 @@ char * generateRandomHexString(unsigned int length)
     //build a hex string choosing randomly selected characters from array
     for (int i = 0; i < length; i++)
     {
-        str[i] = hex_chars[rand() % 16];
+        str[i] = hex_chars[rand() % base_16];
     }
     
     //add null terminator at the end of the string

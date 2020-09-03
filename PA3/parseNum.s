@@ -37,8 +37,9 @@
 * Registers used:
 *   <register> - <use> -- <description of what the value represents>
 * example:
-*   r0 - char -- stores current char of string
-*   r4 - string -- stores the string pointer
+*   r0 - string -- stores hexadecimal string
+*   r1 - char -- stores the null terminator
+*   r2 - number -- stores the number 16 for reference to base 16
 */
 
 parseNum:

@@ -43,8 +43,10 @@ point number and extract its various parts to fill the passed in struct.
 * Registers used:
 *   <register> - <use> -- <description of what the value represents>
 * example:
-*   r0 - char -- stores current char of string
-*   r4 - string -- stores the string pointer
+*   r0 - number -- used for manipulating the unsigned long to extract sign, exp,
+                   and mantissa
+*   r4 - number -- stores the original unsigned long value
+*   r5 - struct -- pointer to the ieeeParts_t struct
 */
 
 extractParts:
