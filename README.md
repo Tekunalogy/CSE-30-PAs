@@ -1,5 +1,4 @@
-# Projects for Basic Data Structures
-Projects for School
+# Low Level Arm Projects and Basic DS
 
 * Project 1 - LinkedList Implementation
 * Project 2 - ARM Assembly Code to make all letters in a string upper-case
